@@ -42,7 +42,7 @@ const Contact = () => {
     const sendEmail = async (retries = 3) => {
       for (let attempt = 1; attempt <= retries; attempt++) {
         try {
-          const response = await fetch('https://nodemailer-q9ey.onrender.com/api/contact', {
+          const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
