@@ -25,7 +25,7 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
-    await sgMail.send({
+    const sgResponse = await sgMail.send({
       to: process.env.EMAIL_USER,
       from: process.env.EMAIL_USER, 
       replyTo: email,
@@ -37,6 +37,7 @@ app.post("/api/contact", async (req, res) => {
         <p>${message}</p>
       `
     });
+    console.log('✅ SendGrid response:', Array.isArray(sgResponse) ? sgResponse.map(r => ({ statusCode: r.statusCode })) : { statusCode: sgResponse?.statusCode });
 
     res.json({ success: true });
   } catch (err) {
